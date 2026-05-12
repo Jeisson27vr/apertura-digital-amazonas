@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banca Digital - Banco Amazonas</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #f7f7f7; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .tarjeta-captura { background-color: white; padding: 30px 20px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-width: 350px; width: 100%; }
+        .logo-banco { color: #D32F2F; font-size: 24px; font-weight: bold; margin-bottom: 10px; }
+        h2 { color: #333; font-size: 20px; margin-bottom: 5px; }
+        p { color: #666; font-size: 14px; margin-bottom: 20px; }
+        input[type="text"], input[type="tel"] { width: 90%; padding: 12px; margin-bottom: 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; text-align: center; outline: none; box-sizing: border-box;}
+        input:focus { border-color: #D32F2F; }
+        .terminos-box { text-align: left; font-size: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 10px; color: #555;}
+        .terminos-box input { margin-top: 2px; transform: scale(1.2); }
+        .terminos-box a { color: #D32F2F; text-decoration: underline; cursor: pointer; }
+        button { background-color: #D32F2F; color: white; border: none; padding: 15px 20px; width: 100%; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; transition: background-color 0.3s; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        /* Modal de Políticas */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
+        .modal-content { background-color: white; padding: 20px; border-radius: 8px; max-width: 320px; width: 90%; max-height: 80vh; overflow-y: auto; text-align: left; font-size: 12px; color: #333;}
+        .modal-content h3 { color: #D32F2F; margin-top: 0; }
+        .close-btn { background-color: #333; margin-top: 15px; padding: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="tarjeta-captura">
+        <div class="logo-banco">Banco Amazonas</div>
+        <h2>Apertura tu Cuenta Digital</h2>
+        <p>Ingresa tus datos para continuar a la descarga segura de nuestra app.</p>
+
+        <input type="text" id="nombres_cliente" placeholder="Tus Nombres y Apellidos" required>
+        <input type="tel" id="cedula_cliente" placeholder="Cédula (10 dígitos)" maxlength="10" required>
+
+        <div class="terminos-box">
+            <input type="checkbox" id="check_terminos">
+            <label for="check_terminos">Autorizo el tratamiento de mis datos personales según la <a onclick="abrirModal()">Política de Privacidad</a>.</label>
+        </div>
+
+        <button id="btn_continuar" onclick="procesarEscaneo()">Continuar y Descargar App</button>
+    </div>
+
+    <div id="modal_politica" class="modal">
+        <div class="modal-content">
+            <h3>Política de Tratamiento de Datos</h3>
+            <p>Conforme a la Ley Orgánica de Protección de Datos Personales del Ecuador, autorizo expresa, libre y voluntariamente a BANCO AMAZONAS S.A. para que realice el tratamiento de los datos personales ingresados en este formulario.</p>
+            <p>Comprendo que la finalidad de esta recopilación es gestionar la apertura de canales digitales, perfilamiento transaccional y cumplimiento de normativas financieras, tributarias y de prevención de lavado de activos exigidas por las autoridades públicas competentes.</p>
+            <p>Declaro que he sido debidamente informado de mis derechos respecto al acceso, rectificación, eliminación y oposición sobre el tratamiento de mis datos, los cuales podré ejercer mediante los canales oficiales del Banco.</p>
+            <button class="close-btn" onclick="cerrarModal()">Entendido, cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        function abrirModal() { document.getElementById('modal_politica').style.display = 'flex'; }
+        function cerrarModal() { document.getElementById('modal_politica').style.display = 'none'; }
+
+        function procesarEscaneo() {
+            var nombres = document.getElementById('nombres_cliente').value.trim();
+            var cedula = document.getElementById('cedula_cliente').value.trim();
+            var aceptaTerminos = document.getElementById('check_terminos').checked;
+            var boton = document.getElementById('btn_continuar');
+
+            if(nombres.length < 3) { alert("Por favor ingresa tus nombres completos."); return; }
+            if(cedula.length < 10) { alert("Por favor ingresa un número de cédula válido de 10 dígitos."); return; }
+            if(!aceptaTerminos) { alert("Debes aceptar la política de tratamiento de datos para continuar."); return; }
+
+            boton.innerText = "Procesando...";
+            boton.disabled = true;
+
+            var parametrosURL = new URLSearchParams(window.location.search);
+            var idColaborador = parametrosURL.get('oficial') || 'ORGANICO';
+
+            // TU URL DE GOOGLE APPS SCRIPT
+            var webhookUrl = "https://script.google.com/macros/s/AKfycbxEzUvyfzjWFh4ysRJzOIF8cdFfP1g32gMoSxfOjVC_CCBu3AoU_-pbuj8kNTQusrw8/exec";
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify({
+                    "nombres": nombres,
+                    "cedula": cedula,
+                    "oficial": idColaborador,
+                    "acepta_politica": "SI"
+                }),
+                headers: { "Content-Type": "text/plain" }
+            })
+            .then(() => { redireccionarTienda(); })
+            .catch(() => { redireccionarTienda(); });
+        }
+
+        function redireccionarTienda() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.location.href = "https://apps.apple.com/us/app/banco-amazonas-s-a/id1277855928?uo=4";
+            } else if (/android/i.test(userAgent)) {
+                window.location.href = "https://play.google.com/store/apps/details?id=com.amazonas.mobile";
+            } else {
+                window.location.href = "https://www.bancoamazonas.com/canales-digitales";
+            }
+        }
+    </script>
+</body>
+</html>
