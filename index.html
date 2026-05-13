@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Banca Digital - Banco Amazonas</title>
     <style>
-        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #f7f7f7; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #f7f7f7; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; flex-direction: column; }
         .tarjeta-captura { background-color: white; padding: 30px 20px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-width: 350px; width: 100%; }
         .logo-banco { color: #D32F2F; font-size: 24px; font-weight: bold; margin-bottom: 10px; }
         h2 { color: #333; font-size: 20px; margin-bottom: 5px; }
@@ -52,8 +52,15 @@
             <button class="close-btn" onclick="cerrarModal()">Entendido, cerrar</button>
         </div>
     </div>
+    
+    <div style="text-align: center; color: #b0b0b0; font-size: 10px; margin-top: 20px;">
+        &copy; 2026 - Desarrollado por Jeisson Ventura | Ventura Data Solutions
+    </div>
 
     <script>
+        // Mensaje Easter Egg para la consola de TI
+        console.log("%c🚀 Portal de Referidos Digitales construido por Jeisson Ventura | Ventura Data Solutions", "color: #D32F2F; font-size: 14px; font-weight: bold;");
+        
         function abrirModal() { document.getElementById('modal_politica').style.display = 'flex'; }
         function cerrarModal() { document.getElementById('modal_politica').style.display = 'none'; }
 
