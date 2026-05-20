@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apertura Tu Neo Cuenta Digital - Banco Amazonas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Apertura Tu Cuenta Digital - Banco Amazonas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -13,29 +13,32 @@
         body {
             font-family: 'Roboto', Arial, sans-serif;
             text-align: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%); 
             margin: 0;
-            padding: 20px;
+            padding: 20px 15px; /* Más aire en los lados */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            box-sizing: border-box;
         }
 
         /* Tarjeta Flotante Principal */
         .tarjeta-captura {
             background-color: white;
-            padding: 40px 30px;
+            padding: 35px 40px; 
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            max-width: 380px;
             width: 100%;
-            border-top: 5px solid #D32F2F;
+            max-width: 400px;
+            border-top: 6px solid #D32F2F; 
+            box-sizing: border-box;
         }
 
+        /* Logo proporcionado */
         .logo-banco-img {
-            max-width: 240px;
+            max-width: 180px; /* Reducido para mayor elegancia */
             width: 100%;
             height: auto;
             margin: 0 auto 15px auto;
@@ -45,8 +48,9 @@
         h2 {
             color: #2c3e50;
             font-size: 22px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
         p.subtitulo {
@@ -58,28 +62,30 @@
 
         /* Inputs estilizados */
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
             text-align: left;
         }
 
         .input-group label {
             display: block;
-            font-size: 12px;
+            font-size: 11px;
             color: #7f8c8d;
-            margin-bottom: 5px;
-            font-weight: 500;
-            margin-left: 5px;
+            margin-bottom: 6px;
+            font-weight: 700;
+            margin-left: 2px;
+            letter-spacing: 0.5px;
         }
 
         input[type="text"], input[type="tel"] {
             width: 100%;
-            padding: 14px;
-            border: 2px solid #ecf0f1;
-            border-radius: 10px;
+            padding: 14px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
             font-size: 16px;
             transition: all 0.3s ease;
             box-sizing: border-box;
-            background-color: #fafbfc;
+            background-color: #f8fafc;
+            color: #334155;
         }
 
         input:focus {
@@ -89,34 +95,38 @@
             box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
         }
 
-        /* Checkbox Legal */
+        /* Checkbox Legal Alineado */
         .terminos-box {
             text-align: left;
-            font-size: 11px;
+            font-size: 11px; 
             margin-top: 20px;
             margin-bottom: 25px;
             display: flex;
             align-items: flex-start;
-            gap: 10px;
-            color: #555;
+            gap: 12px;
+            color: #475569;
             line-height: 1.5;
-            background-color: #f8f9fa;
-            padding: 15px;
+            background-color: #f8fafc;
+            padding: 12px 15px;
             border-radius: 8px;
             border-left: 3px solid #D32F2F;
         }
 
         .terminos-box input {
-            margin-top: 3px;
-            transform: scale(1.3);
+            margin-top: 2px; /* Alineación perfecta con el texto */
+            transform: scale(1.2);
             accent-color: #D32F2F;
+            cursor: pointer;
+        }
+
+        .terminos-box label {
+            cursor: pointer;
         }
 
         .terminos-box a {
             color: #D32F2F;
             text-decoration: underline;
-            cursor: pointer;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         /* Botón de Acción Principal */
@@ -124,14 +134,15 @@
             background-color: #D32F2F;
             color: white;
             border: none;
-            padding: 16px 20px;
+            padding: 15px 20px;
             width: 100%;
-            border-radius: 10px;
+            border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 700;
             transition: background-color 0.2s, transform 0.1s;
-            box-shadow: 0 4px 6px rgba(211, 47, 47, 0.2);
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.2);
+            letter-spacing: 0.3px;
         }
 
         button.btn-primario:hover {
@@ -144,34 +155,33 @@
         }
 
         button.btn-primario:disabled {
-            background-color: #bdc3c7;
+            background-color: #cbd5e1;
             cursor: not-allowed;
             box-shadow: none;
-            transform: none;
         }
 
         /* Modal Legal */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(3px);}
-        .modal-content { background-color: white; padding: 30px; border-radius: 12px; max-width: 400px; width: 90%; max-height: 85vh; overflow-y: auto; text-align: justify; font-size: 13px; color: #444; line-height: 1.6; box-shadow: 0 20px 40px rgba(0,0,0,0.2);}
-        .modal-content h3 { color: #D32F2F; margin-top: 0; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; text-align: center; font-size: 18px;}
-        .close-btn { background-color: #2c3e50; color: white; margin-top: 25px; padding: 14px; width: 100%; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 15px; transition: background-color 0.2s;}
-        .close-btn:hover { background-color: #1a252f; }
+        .modal-content { background-color: white; padding: 25px; border-radius: 12px; max-width: 400px; width: 90%; max-height: 85vh; overflow-y: auto; text-align: justify; font-size: 13px; color: #334155; line-height: 1.6; box-shadow: 0 20px 40px rgba(0,0,0,0.2);}
+        .modal-content h3 { color: #D32F2F; margin-top: 0; border-bottom: 2px solid #f1f5f9; padding-bottom: 12px; text-align: center; font-size: 16px;}
+        .close-btn { background-color: #1e293b; color: white; margin-top: 20px; padding: 12px; width: 100%; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; transition: background-color 0.2s;}
+        .close-btn:hover { background-color: #0f172a; }
 
         /* ALERTA PERSONALIZADA (TOAST) */
         #toast {
             visibility: hidden;
             min-width: 280px;
-            background-color: #D32F2F; /* Rojo corporativo para errores */
+            background-color: #D32F2F; 
             color: #fff;
             text-align: center;
             border-radius: 8px;
-            padding: 16px;
+            padding: 14px;
             position: fixed;
             z-index: 2000;
             left: 50%;
             transform: translateX(-50%);
             bottom: 20px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             box-shadow: 0 10px 30px rgba(211, 47, 47, 0.3);
             opacity: 0;
@@ -181,15 +191,26 @@
         #toast.show {
             visibility: visible;
             opacity: 1;
-            bottom: 50px;
+            bottom: 40px;
         }
 
         /* Footer */
         .footer-text {
             text-align: center;
-            color: #95a5a6;
+            color: #94a3b8;
             font-size: 11px;
-            margin-top: 30px;
+            margin-top: 25px;
+        }
+
+        /* MEDIA QUERIES PARA CELULARES PEQUEÑOS */
+        @media (max-width: 480px) {
+            .tarjeta-captura {
+                padding: 30px 20px; /* Menos padding lateral en celular para dar más espacio a los inputs */
+            }
+            .logo-banco-img {
+                max-width: 160px; /* Logo más pequeño en móvil */
+            }
+            h2 { font-size: 20px; }
         }
     </style>
 </head>
@@ -199,18 +220,18 @@
 
     <div class="tarjeta-captura">
         <img src="logo_banco.png" alt="Logo Banco Amazonas" class="logo-banco-img">
-
+        
         <h2>Apertura Tu Neo Cuenta Digital</h2>
         <p class="subtitulo">Ingresa tus datos para continuar a la descarga segura de nuestra app.</p>
 
         <div class="input-group">
             <label for="nombres_cliente">NOMBRES COMPLETOS</label>
-            <input type="text" id="nombres_cliente" placeholder="Ej: Juan Pérez" required>
+            <input type="text" id="nombres_cliente" placeholder="Ej: Juan Pérez" required autocomplete="off">
         </div>
 
         <div class="input-group">
             <label for="cedula_cliente">NÚMERO DE CÉDULA</label>
-            <input type="tel" id="cedula_cliente" placeholder="10 dígitos" maxlength="10" required>
+            <input type="tel" id="cedula_cliente" placeholder="10 dígitos" maxlength="10" required autocomplete="off">
         </div>
 
         <div class="terminos-box">
@@ -241,12 +262,10 @@
         function abrirModal() { document.getElementById('modal_politica').style.display = 'flex'; }
         function cerrarModal() { document.getElementById('modal_politica').style.display = 'none'; }
 
-        // Función para mostrar la alerta profesional animada
         function mostrarAlerta(mensaje) {
             var toast = document.getElementById("toast");
             toast.innerHTML = "⚠️ " + mensaje;
             toast.className = "show";
-            // Desaparece después de 3.5 segundos
             setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3500);
         }
 
@@ -280,18 +299,17 @@
             var aceptaTerminos = document.getElementById('check_terminos').checked;
             var boton = document.getElementById('btn_continuar');
 
-            // Validaciones conectadas al nuevo sistema de Toast
-            if(nombres.length < 3) {
-                mostrarAlerta("Por favor, ingresa tus nombres completos.");
-                return;
+            if(nombres.length < 3) { 
+                mostrarAlerta("Por favor, ingresa tus nombres completos."); 
+                return; 
             }
-            if(!validarCedulaEcuatoriana(cedula)) {
-                mostrarAlerta("La cédula ingresada no es válida. Revisa los números.");
-                return;
+            if(!validarCedulaEcuatoriana(cedula)) { 
+                mostrarAlerta("La cédula ingresada no es válida. Revisa los números."); 
+                return; 
             }
-            if(!aceptaTerminos) {
-                mostrarAlerta("Debes aceptar la política de privacidad para continuar.");
-                return;
+            if(!aceptaTerminos) { 
+                mostrarAlerta("Debes aceptar la política de privacidad para continuar."); 
+                return; 
             }
 
             boton.innerText = "Procesando de forma segura...";
